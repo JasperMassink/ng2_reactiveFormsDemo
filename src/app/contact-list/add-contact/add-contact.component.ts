@@ -1,7 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { FormGroup, FormControl } from '@angular/forms';
+// import FormBuilder
+import { FormGroup, FormBuilder } from '@angular/forms';
+// import { FormGroup, FormControl } from '@angular/forms';
 
 import { AdressService } from '../../core/services/adress.service';
 import { ContactModel } from '../../shared/models/contact.model'
@@ -19,20 +21,30 @@ export class AddContactComponent implements OnInit {
 
   contactFormModel: FormGroup;
 
-  constructor(private adressService: AdressService) { }
+  // Inject FormBuilder
+  constructor(
+    private adressService: AdressService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createContactForm();
   }
 
-  createContactForm(){
-    this.contactFormModel = new FormGroup({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      email: new FormControl()
+  createContactForm() {
+   this.contactFormModel = this.fb.group({
+      firstName: null,
+      lastName: null,
+      email: null
     })
-
   }
+
+  // createContactForm() {
+  //   this.contactFormModel = new FormGroup({
+  //     firstName: new FormControl(),
+  //     lastName: new FormControl(),
+  //     email: new FormControl()
+  //   })
+  // }
 
   addContactHandler() {
     // this.updateContacts();
