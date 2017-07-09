@@ -6,17 +6,17 @@ import { ContactModel } from '../../shared/models/contact.model'
 
 @Component({
   selector: 'app-add-adress',
-  templateUrl: './add-adress.component.html',
-  styleUrls: ['./add-adress.component.css']
+  templateUrl: './add-contact.component.html',
+  styleUrls: ['./add-contact.component.css']
 })
-export class AddAdressComponent implements OnInit {
+export class AddContactComponent implements OnInit {
 
   @Output()updateContactList: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   contactFormModel: ContactModel = {
-    fullName: '',
-    emailAdress: '',
-    telephoneNumber: ''
+    firstName: '',
+    lastName: '',
+    emailAdress: ''
   };
 
   constructor(private adressService: AdressService) { }

@@ -9,14 +9,14 @@ export class AdressService {
 
   private contacts: Array<ContactModel> = [
     {
-      fullName: 'Jasper Massink',
-      emailAdress: 'jasper.massink01@gmail.com',
-      telephoneNumber: '06-12643934'
+      firstName: 'Jasper',
+      lastName: 'Massink',
+      emailAdress: 'jasper.massink@capgemini.com'
     },
       {
-      fullName: 'Piet Saman',
-      emailAdress: 'piet.saman@hotmail.com',
-      telephoneNumber: '06-12123434'
+      firstName: 'Piet',
+      lastName: 'Saman',
+      emailAdress: 'piet.saman@hotmail.com'
     }
   ]
 

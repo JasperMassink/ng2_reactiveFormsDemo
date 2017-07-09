@@ -3,19 +3,17 @@ import { AdressService } from '../core/services/adress.service';
 import { Observable } from 'rxjs';
 
 import { ContactModel } from '../shared/models/contact.model';
-import { AddAdressComponent } from './add-adress/add-adress.component';
+
 
 @Component({
   selector: 'app-adress-book',
-  templateUrl: './adress-book.component.html',
-  styleUrls: ['./adress-book.component.css']
+  templateUrl: './contact-list.component.html',
+  styleUrls: ['./contact-list.component.css']
 })
-export class AdressBookComponent implements OnInit {
+export class ContactListComponent implements OnInit {
 
   showAddForm = false;
   contacts: Array<ContactModel>;
-
-  @ViewChild(AddAdressComponent) addAdressComponent: AddAdressComponent;
 
   constructor(private adressService: AdressService) { }
 

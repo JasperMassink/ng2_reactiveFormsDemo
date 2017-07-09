@@ -7,14 +7,14 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { AdressBookComponent } from './adress-book/adress-book.component';
-import { AddAdressComponent } from './adress-book/add-adress/add-adress.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
+import { AddContactComponent } from './contact-list/add-contact/add-contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdressBookComponent,
-    AddAdressComponent
+    ContactListComponent,
+    AddContactComponent
   ],
   imports: [
     BrowserModule,
