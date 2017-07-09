@@ -11,12 +11,12 @@ export class AdressService {
     {
       firstName: 'Jasper',
       lastName: 'Massink',
-      emailAdress: 'jasper.massink@capgemini.com'
+      emailAddress: 'jasper.massink@capgemini.com'
     },
       {
       firstName: 'Piet',
       lastName: 'Saman',
-      emailAdress: 'piet.saman@hotmail.com'
+      emailAddress: 'piet.saman@hotmail.com'
     }
   ]
 

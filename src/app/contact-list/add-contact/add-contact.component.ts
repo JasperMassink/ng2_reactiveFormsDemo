@@ -1,6 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+// import AbstractControl
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+// import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AdressService } from '../../core/services/adress.service';
 import { ContactModel } from '../../shared/models/contact.model'
@@ -14,11 +17,31 @@ export class AddContactComponent implements OnInit {
 
   @Output() updateContactList: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  emailPattern: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  displayedEmailValidationMessage: string;
+  displayedFirstnameValidationMessage: string;
+  displayedLastNameValidationMessage: string;
+
+  private emailPattern: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  //validation message from html to component class, as key/value paris
+  private emailValidationMessages = {
+    required: 'Please enter your email address',
+    pattern: 'Please enter a valid email address'
+  }
+
+  private firstnameValidationMessages = {
+    required: 'Please enter your first name',
+    minLength: 'The first name must be longer than 3 characters'
+  }
+
+  private lastNameValidationMessages = {
+    required: 'Please enter your last name',
+    minLength: 'The last name must be longer than 3 characters'
+  }
 
   contactFormModel: FormGroup;
 
- 
+
   constructor(
     private adressService: AdressService,
     private fb: FormBuilder) { }
@@ -31,8 +54,22 @@ export class AddContactComponent implements OnInit {
     this.contactFormModel = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
-      emailAdress: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64), Validators.pattern(this.emailPattern)]]
+      emailAddress: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64), Validators.pattern(this.emailPattern)]]
     })
+
+    // create reference to emailadress
+    const emailControl = this.contactFormModel.get('emailAddress');
+    //create a watcher to emailaddres
+    emailControl.valueChanges.subscribe(value => this.setEmailValidationMessage(emailControl))
+  }
+
+  //set message depending on the error
+  setEmailValidationMessage(control: AbstractControl) {
+    this.displayedEmailValidationMessage = '';
+    if ((control.touched || control.dirty) && control.errors) {
+      this.displayedEmailValidationMessage = Object.keys(control.errors).map(key =>
+        this.emailValidationMessages[key]).join('');
+    }
   }
 
   addContactHandler() {
@@ -44,11 +81,11 @@ export class AddContactComponent implements OnInit {
   }
 
   updateContacts() {
-    const postModel : ContactModel = Object.assign({}, new ContactModel(), this.contactFormModel.value)
+    const postModel: ContactModel = Object.assign({}, new ContactModel(), this.contactFormModel.value)
     this.adressService.updateContacts(postModel)
       .subscribe(() => this.closeForm(true), (error) => console.log(error));
   }
-  
+
   closeForm(updateContacts: boolean) {
     this.updateContactList.emit(updateContacts);
   }
