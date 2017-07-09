@@ -54,7 +54,9 @@ export class AddContactComponent implements OnInit {
     })
 
     const emailControl = this.contactFormModel.get('emailAddress');
-    emailControl.valueChanges.subscribe(value => this.setEmailValidationMessage(emailControl))
+    // Debounce time reactive transformation added
+    emailControl.valueChanges.debounceTime(1000).subscribe(value => this.setEmailValidationMessage(emailControl));
+    //  emailControl.valueChanges.subscribe(value => this.setEmailValidationMessage(emailControl));
   }
 
   setEmailValidationMessage(control: AbstractControl) {
