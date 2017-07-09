@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-// import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { AdressService } from '../../core/services/adress.service';
 import { ContactModel } from '../../shared/models/contact.model'
@@ -20,7 +18,7 @@ export class AddContactComponent implements OnInit {
 
   contactFormModel: FormGroup;
 
-  // Inject FormBuilder
+ 
   constructor(
     private adressService: AdressService,
     private fb: FormBuilder) { }
@@ -36,14 +34,6 @@ export class AddContactComponent implements OnInit {
       email: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64), Validators.pattern(this.emailPattern)]]
     })
   }
-
-  // createContactForm() {
-  //   this.contactFormModel = this.fb.group({
-  //     firstName: null,
-  //     lastName: null,
-  //     email: null
-  //   })
-  // }
 
   addContactHandler() {
     // this.updateContacts();
