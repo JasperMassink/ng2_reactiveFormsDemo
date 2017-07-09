@@ -1,24 +1,14 @@
 <form class="form-horizontal" novalidate [formGroup]="contactFormModel">
-  <!--<form class="form-horizontal" novalidate #form="ngForm">-->
   <div class="form-group" [ngClass]="{'has-error': (contactFormModel.get('firstName').touched || contactFormModel.get('firstName').dirty) && contactFormModel.get('firstName').invalid}">
     <label class="control-label col-md-3">First name</label>
     <div class="col-md-6">
-
-      <!--Template reference variable deleted
-      ngModel deleted
-      name deleted
-      FormControlName added
-      Template reference variable replaced call to the formgroup in NGclass-->
       <input class="form-control" 
       required minlength="3" 
       maxlength="64" 
       type="text" 
       placeholder="First name (required)" 
       formControlName="firstName">
-      <!--name="firstNameInput" 
-      #contactFormModel.get('firstName')="ngModel"
-      [(ngModel)]="contactFormModel.firstName"-->
-      <span class="help-block" *ngIf="(contactFormModel.get('firstName').touched || contactFormModel.get('firstName').dirty) && contactFormModel.get('firstName').invalid">
+        <span class="help-block" *ngIf="(contactFormModel.get('firstName').touched || contactFormModel.get('firstName').dirty) && contactFormModel.get('firstName').invalid">
         <span *ngIf="contactFormModel.get('firstName').errors.required">  Please enter your first name </span>
       <span *ngIf="contactFormModel.get('firstName').errors.minlength">  The first name must be longer than 3 characters </span>
       </span>
@@ -48,7 +38,6 @@
   <div class="form-group">
     <div class="col-md-offset-3 col-md-9">
       <button class="btn btn-default" (click)="addContactHandler()" [disabled]="contactFormModel.invalid">Add Contact</button>
-      <!--<button class="btn btn-default" (click)="addContactHandler()" [disabled]="form.invalid">Add Contact</button>-->
       <button class="btn btn-default" (click)="cancelHandler()">Cancel</button>
     </div>
   </div>
@@ -59,12 +48,5 @@
 <br> -----Formgroup---------
 <br> dirty: {{ contactFormModel.dirty }} <br> touched: {{ contactFormModel.touched }} <br> valid: {{ contactFormModel.valid
 }} <br>
-<br> ngForm values: {{contactFormModel.value | json}}
+<br> Formgroup values: {{contactFormModel.value | json}}
 
-
-<!--<br> --------ngModel------
-<br> first name: {{ contactFormModel.firstName }} <br> last name: {{ contactFormModel.lastName }} <br> e-mail adress: {{
-contactFormModel.emailAdress }} <br>
-<br> -----ngForm---------
-<br> dirty: {{ form.dirty }} <br> touched: {{ form.touched }} <br> valid: {{ form.valid }} <br>
-<br> ngForm values: {{form.value | json}}-->

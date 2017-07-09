@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { CoreModule } from './core/core.module';
@@ -20,7 +19,6 @@ import { AddContactComponent } from './contact-list/add-contact/add-contact.comp
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    // FormsModule,
     HttpModule,
     CoreModule,
     SharedModule
