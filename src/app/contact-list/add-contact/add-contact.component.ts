@@ -31,16 +31,23 @@ export class AddContactComponent implements OnInit {
     this.contactFormModel = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
-      email: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64), Validators.pattern(this.emailPattern)]]
+      emailAdress: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64), Validators.pattern(this.emailPattern)]]
     })
   }
 
   addContactHandler() {
-    // this.updateContacts();
+    this.updateContacts();
   }
 
   cancelHandler() {
     this.closeForm(false);
+  }
+
+// Use object.assign() to create a postmodel
+ updateContacts() {
+    const postModel : ContactModel = Object.assign({}, new ContactModel(), this.contactFormModel.value)
+    this.adressService.updateContacts(postModel)
+      .subscribe(() => this.closeForm(true), (error) => console.log(error));
   }
 
   // updateContacts() {
