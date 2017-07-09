@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdressService } from '../core/services/adress.service';
 import { Observable } from 'rxjs';
 
-import { ContactModel } from '../shared/models/contact.model'
+import { ContactModel } from '../shared/models/contact.model';
+import { AddAdressComponent } from './add-adress/add-adress.component';
 
 @Component({
   selector: 'app-adress-book',
@@ -14,6 +15,7 @@ export class AdressBookComponent implements OnInit {
   showAddForm = false;
   contacts: Array<ContactModel>;
 
+  @ViewChild(AddAdressComponent) addAdressComponent: AddAdressComponent;
 
   constructor(private adressService: AdressService) { }
 
@@ -25,9 +27,19 @@ export class AdressBookComponent implements OnInit {
     this.adressService.getContacts()
       .subscribe((data) => this.contacts = data),
       (error) => console.log(error);
-    ;
 
-
+  }
+  updateContactFromAddAdress(updateContacts: boolean) {
+    if (updateContacts) {
+      this.adressService.getContacts()
+        .subscribe((data) => {
+          this.contacts = data;
+          this.showAddForm = false;
+        }),
+        (error) => console.log(error);
+    } else {
+      this.showAddForm = false;
+    }
   }
 
 }

@@ -22,8 +22,16 @@ export class AdressService {
 
   constructor() { }
 
+// These two methods use normally a http methods and link to an API endpoint. 
+// For demo purposes the contactlist is kept in the Service
+
   getContacts() {
     return Observable.of(this.contacts);
+  }
+
+  updateContacts(contact : ContactModel ){
+    this.contacts.push(contact);
+    return Observable.of('succes')
   }
 
 }

@@ -12,9 +12,9 @@
     </tr>
   </table>
 
-  <button class="btn btn-default" (click)="showAddForm = !showAddForm">Add adress</button>
+  <button class="btn btn-default pull-right" (click)="showAddForm = !showAddForm">Add adress</button>
 </div>
 
 <div *ngIf="showAddForm === true">
-  <app-add-adress> </app-add-adress>
+  <app-add-adress (updateContactList) = 'updateContactFromAddAdress($event)'> </app-add-adress>
 </div>
