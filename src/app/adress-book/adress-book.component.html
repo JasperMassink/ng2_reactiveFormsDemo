@@ -5,10 +5,10 @@
       <th>E-mail adress</th>
       <th>Phone number</th>
     </tr>
-    <tr>
-      <td>Jasper Massink</td>
-      <td>jasper.massink01@gmail.com</td>
-      <td>0612643934</td>
+    <tr *ngFor="let contact of contacts">
+      <td>{{ contact.fullName }}</td>
+      <td>{{ contact.emailAdress }}</td>
+      <td>{{ contact.telephoneNumber }}</td>
     </tr>
   </table>
 
