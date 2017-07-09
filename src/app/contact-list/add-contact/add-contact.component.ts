@@ -1,9 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-
-// import AbstractControl
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-// import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AdressService } from '../../core/services/adress.service';
 import { ContactModel } from '../../shared/models/contact.model'
@@ -23,7 +20,6 @@ export class AddContactComponent implements OnInit {
 
   private emailPattern: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  //validation message from html to component class, as key/value paris
   private emailValidationMessages = {
     required: 'Please enter your email address',
     pattern: 'Please enter a valid email address'
@@ -57,13 +53,10 @@ export class AddContactComponent implements OnInit {
       emailAddress: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64), Validators.pattern(this.emailPattern)]]
     })
 
-    // create reference to emailadress
     const emailControl = this.contactFormModel.get('emailAddress');
-    //create a watcher to emailaddres
     emailControl.valueChanges.subscribe(value => this.setEmailValidationMessage(emailControl))
   }
 
-  //set message depending on the error
   setEmailValidationMessage(control: AbstractControl) {
     this.displayedEmailValidationMessage = '';
     if ((control.touched || control.dirty) && control.errors) {
