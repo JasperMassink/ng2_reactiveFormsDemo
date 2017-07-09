@@ -43,18 +43,12 @@ export class AddContactComponent implements OnInit {
     this.closeForm(false);
   }
 
-// Use object.assign() to create a postmodel
- updateContacts() {
+  updateContacts() {
     const postModel : ContactModel = Object.assign({}, new ContactModel(), this.contactFormModel.value)
     this.adressService.updateContacts(postModel)
       .subscribe(() => this.closeForm(true), (error) => console.log(error));
   }
-
-  // updateContacts() {
-  //   this.adressService.updateContacts(this.contactFormModel)
-  //     .subscribe(() => this.closeForm(true), (error) => console.log(error));
-  // }
-
+  
   closeForm(updateContacts: boolean) {
     this.updateContactList.emit(updateContacts);
   }
