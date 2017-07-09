@@ -1,0 +1,20 @@
+<div *ngIf="showAddForm === false">
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th>E-mail adress</th>
+      <th>Phone number</th>
+    </tr>
+    <tr>
+      <td>Jasper Massink</td>
+      <td>jasper.massink01@gmail.com</td>
+      <td>0612643934</td>
+    </tr>
+  </table>
+
+  <button class="btn btn-default" (click)="showAddForm = !showAddForm">Add adress</button>
+</div>
+
+<div *ngIf="showAddForm === true">
+  <app-add-adress> </app-add-adress>
+</div>
