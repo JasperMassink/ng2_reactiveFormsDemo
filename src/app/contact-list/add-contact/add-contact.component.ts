@@ -48,13 +48,28 @@ export class AddContactComponent implements OnInit {
 
   createContactForm() {
     this.contactFormModel = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64),]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
-      emailAddress: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64), Validators.pattern(this.emailPattern)]]
+      emailGroup: this.fb.group({
+        email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+        bevestigEmail: ['', [Validators.required]]
+      }, { validator: this.emailCompare })
     })
 
-    const emailControl = this.contactFormModel.get('emailAddress');
-    emailControl.valueChanges.debounceTime(1000).subscribe(value => this.setEmailValidationMessage(emailControl));
+    // const emailControl = this.contactFormModel.get('emailGroup');
+    // emailControl.valueChanges.debounceTime(1000).subscribe(value => this.setEmailValidationMessage(emailControl));
+  }
+
+  emailCompare(control: AbstractControl) {
+    let email1 = control.get('email');
+    let email2 = control.get('bevestigEmail');
+    if (email1.pristine || email2.pristine) {
+      return null;
+    }
+    if (email1.value === email2.value) {
+      return null;
+    }
+    return { 'match': true }
   }
 
   setEmailValidationMessage(control: AbstractControl) {
